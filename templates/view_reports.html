@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reports</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.16/dist/tailwind.min.css">
+</head>
+<body class="font-['Helvetica_Neue',_Arial,_sans-serif] bg-[#141414] text-[#e5e5e5]">
+  <h1 class="text-[#e50914] text-5xl font-bold mt-10">Reports</h1>
+
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-12 mt-10">
+    {% for report in reports %}
+    <div class="bg-[#222] rounded-md shadow p-5">
+      <img src="{{ report.image_url }}" alt="{{ report.title }}" class="w-full h-auto rounded-md mb-5" />
+      <h3 class="text-[#e5e5e5] text-[1.5rem] mb-2">{{ report.title }}</h3>
+      <p class="text-[#a0a0a0] text-[1.1rem] mb-5">{{ report.description }}</p>
+      <form action="{{ url_for('delete_report', report_id=loop.index0) }}" method="POST">
+        <button class="bg-[#e50914] text-white px-4 py-2 rounded-md">Delete</button>
+      </form>
+    </div>
+    {% endfor %}
+  </div>
+</body>
+</html>

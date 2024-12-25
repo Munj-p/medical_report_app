@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Dashboard</title>
+</head>
+<body>
+    <h1>Dashboard</h1>
+    <a href="{{ url_for('add_report') }}">Add Report</a>
+    <a href="{{ url_for('logout') }}">Logout</a>
+
+    <div class="reports">
+        {% for report in reports %}
+        <div>
+            <img src="{{ report.image_url }}" alt="{{ report.title }}">
+            <h3>{{ report.title }}</h3>
+            <p>{{ report.description }}</p>
+            <form action="{{ url_for('delete_report', report_id=report.id) }}" method="POST">
+                <button type="submit">Delete</button>
+            </form>
+        </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
